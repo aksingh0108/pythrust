@@ -1,0 +1,48 @@
+.cover-page-wrapper {
+    display: flex;                 /* Enables Flexbox layout */
+    flex-direction: column;        /* Arranges children in a column */
+    align-items: center;           /* Centers children horizontally */
+    justify-content: center;       /* Centers children vertically */
+    height: 327px;     
+    left: 395px;            /* Makes the div take up the full height of the viewport */
+    text-align: center;            /* Centers text inside the elements */
+    font-family: Inter; 
+    font-weight: 400;
+    // line-height: 36.31px;text-align: left;
+  }
+
+.cover-page-wrapper h5{
+    font-size: 30px;
+    line-height: 24.2px;
+    color: #D63637;
+}
+
+.cover-page-wrapper p{
+    font-size: 20px;
+    line-height: 24.2px;
+}
+  
+// .cover-page-wrapper h5{
+//     width: 233px;height: 34px;top: 227px;left: 395px;gap: 0px;opacity: 0px;color: #D63637;
+//     font-family: Inter;font-size: 30px;font-weight: 400;line-height: 36.31px;text-align: center;
+//     // text-align: center;
+// }
+
+// .cover-page-wrapper p{
+//     width: 233px;height: 34px;top: 227px;left: 395px;gap: 0px;opacity: 0px;color: #D63637;
+//     font-family: Inter;font-size: 30px;font-weight: 400;line-height: 36.31px;text-align: center;
+//     // text-align: center;
+// }
+
+// .p-search{
+//     width: 134px;height: 20px;top: 344px;left: 445px;gap: 0px;opacity: 0px;
+//     font-family: Inter;font-size: 20px;font-weight: 400;line-height: 24.2px;text-align: left;
+//     color: #000000;
+// }
+
+// .p-date{
+//     width: 199px;height: 20px;top: 498px;left: 412px;gap: 0px;opacity: 0px;
+//     font-family: Inter;font-size: 20px;font-weight: 400;line-height: 24.2px;text-align: left;
+//     color: #000000;
+
+// }

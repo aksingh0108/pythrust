@@ -1,0 +1,113 @@
+
+<div style="padding: 1rem;">
+
+  <!-- Button Section -->
+  <div class="res-button">
+    <button mat-raised-button *ngFor="let patent of rawReportData.patents; 
+  let i = index" (click)="changeContent(patent)" [class.active]="patent === selectedPatent">
+      Result {{ i + 1 }}
+    </button>
+  </div>
+
+  <!-- Content Display Section -->
+  <div *ngIf="selectedPatent" style="padding-top: 2rem;">
+    <div class="primary-matrix-container-wrapper" [ngClass]="{'modal-open': !showRows}">
+      <div class="table-container">
+        <table>
+          <tr>
+            <th *ngIf="showRows">Claim</th>
+            <th *ngIf="showRows">Element</th>
+            <th>Claim Element</th>
+            <th>
+              <p>Patent Number: {{ selectedPatent.patentNo }}</p>
+              <p>Filing Date: {{ selectedPatent.filingDate | date }}</p>
+              <p>Publication Date: {{ selectedPatent.publicationDate | date }}</p>
+            </th>
+          </tr>
+
+          <ng-container *ngFor="let data of rawReportData.claims">
+            <tr>
+              <td *ngIf="showRows" [attr.rowspan]="data.claimElements?.length">{{ data.id }}</td>
+              <td *ngIf="showRows && data.claimElements && data.claimElements.length > 0">
+                {{ data.claimElements[0].id }}
+              </td>
+              <td *ngIf="data.claimElements && data.claimElements.length > 0">
+                {{ data.claimElements[0].featureTitle }}
+              </td>
+              <td *ngIf="data.claimElements && data.claimElements.length > 0">
+                <ng-container *ngFor="let patent of data.claimElements[0].patentResults; let i = index">
+                  <div class="img-mapping">
+
+                    <div class="text-content">
+                      <span>{{ patent.dataReference }}</span>
+                      <p>{{ patent.description }}</p>
+                    </div>
+
+
+
+                    <div *ngFor="let im of patent.images">
+                      <img (click)="openImageModal(im)" alt="Patent Image" src="{{im}}">
+                    </div>
+
+                  </div>
+                  <span *ngIf="i < (data.claimElements[0].patentResults?.length || 0) - 1">, </span>
+                </ng-container>
+              </td>
+            </tr>
+
+            <ng-container *ngFor="let element of data.claimElements; let i = index;">
+              <tr *ngIf="i > 0 ">
+                <td *ngIf="showRows">{{ element.id }}</td>
+                <td>{{ element.featureTitle }}</td>
+                <td *ngIf="data.claimElements && data.claimElements.length > 0">
+                  <ng-container *ngFor="let patent of element.patentResults; let i = index">
+                    <div class="img-mapping">
+
+
+                      <div class="text-content">
+                <td>
+                  <span>{{ patent.dataReference }}</span>
+                  <p>{{ patent.description }}</p>
+                </td>
+      </div>
+      <div *ngFor="let im of patent.images">
+        <td> <img (click)="openImageModal(im)" alt="Patent Image" src="{{im}}"> </td>
+      </div>
+
+
+    </div>
+    <span *ngIf="i < (data.claimElements[0].patentResults?.length || 0) - 1">, </span>
+    </ng-container>
+    </td>
+
+    </tr>
+    </ng-container>
+    </ng-container>
+    </table>
+  </div>
+
+  <div class="image-modal" *ngIf="selectedImage">
+    <div class="imgHeader">
+      <button class="closeBtn" mat-icon-button (click)="closeImageModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button class="fullScreenBtn" mat-icon-button (click)="toggleFullscreen()">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+    </div>
+    <div class="imgContainer" #imgContainer>
+      <img [src]="selectedImage" alt="Modal Image" class="full-screen-image">
+
+    </div>
+    <div class="zoom-controls">
+      <button class="zoomInBtn" mat-icon-button (click)="zoomIn()">
+        <mat-icon>zoom_in</mat-icon>
+      </button>
+      <button class="zoomOutBtn" mat-icon-button (click)="zoomOut()">
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+</div>

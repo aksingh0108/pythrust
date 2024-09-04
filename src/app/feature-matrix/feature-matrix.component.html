@@ -1,0 +1,99 @@
+<div class="table-container" style="padding: 10px;">
+  <table>
+    
+    <tr>
+      <th>Claim</th>
+      <th>Element</th>
+      <th>Claim Element</th>
+      <th>Patent Id</th>
+     
+      <ng-container *ngFor="let p1 of rawReportData.claims"> 
+        <ng-container *ngFor="let p2 of p1.claimElements"> 
+          <ng-container *ngFor="let p3 of p2.patentMatrix"> 
+            <th>{{ p3.patentNo }}</th>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tr>
+  
+    <!-- jhtd  -->
+    <ng-container *ngFor="let data of rawReportData.claims">
+      <tr>
+        <td  [attr.rowspan]="data.claimElements?.length">{{ data.id }}</td>
+        <td *ngIf="data.claimElements && data.claimElements.length > 0">
+          {{ data.claimElements[0].id }}
+        </td>
+        <td *ngIf="data.claimElements && data.claimElements.length > 0">
+          {{ data.claimElements[0].featureTitle }}
+        </td>
+        <td *ngIf="data.claimElements && data.claimElements.length > 0">
+          <ng-container *ngFor="let patent of data.claimElements[0].patentResults; let i = index">
+            <div class="img-mapping">
+              <div class="text-content">
+                <span>{{ patent.dataReference }}</span>
+                <p>{{ patent.description }}</p>
+              </div>
+              <div *ngFor="let im of patent.images">
+                <img   alt="Patent Image">
+              </div>
+            </div>
+            <span *ngIf="i < (data.claimElements[0].patentResults?.length || 0) - 1">, </span>
+          </ng-container>
+        </td>
+  
+        <td *ngIf="data.claimElements && data.claimElements.length > 0">
+  
+  
+          <ng-container *ngFor="let pl1 of data.claimElements[0].patentMatrix">
+            {{pl1.label}} 
+          </ng-container>
+  
+        </td>
+  
+      </tr>
+  
+      <ng-container *ngFor="let element of data.claimElements; let i = index;">
+        <tr *ngIf="i > 0 ">
+          <td  >{{ element.id }}</td>
+          <td>{{ element.featureTitle }}</td>
+          <td *ngIf="data.claimElements && data.claimElements.length > 0">
+            <ng-container *ngFor="let patent of element.patentResults; let j = index">
+              <div class="img-mapping">
+                <div class="text-content">
+                  <span>{{ patent.dataReference }}</span>
+                  <p>{{ patent.description }}</p>
+                </div>
+                <div *ngFor="let im of patent.images">
+                  <img   alt="Patent Image">
+                </div>
+              </div>
+              <span *ngIf="j < (element.patentResults?.length || 0) - 1">, </span>
+            </ng-container>
+          </td>
+         <td>
+  
+  
+          <ng-container *ngFor="let pl1 of element.patentMatrix">
+            <!-- <ng-container *ngFor="let pl2 of pl1.label"> -->
+       {{pl1.label}} 
+          <!-- </ng-container>  -->
+          </ng-container>
+  
+        </td>
+  
+        </tr>
+      </ng-container>
+    </ng-container>
+  
+       
+  
+
+  </table>
+</div>
+ 
+ 
+
+
+
+ 
+
